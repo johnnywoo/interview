@@ -4,19 +4,61 @@ class Test extends \PHPUnit_Framework_TestCase
 {
     public function testNoMoves()
     {
-        $this->runFile('tests/no-moves.test');
-    }
-
-    public function testSimple()
-    {
-        $this->runFile('tests/simple-move.test');
+        $this->runFile('tests/001-no-moves.test');
     }
 
     public function testSimpleError()
     {
-        $this->runFile('tests/simple-error.test');
+        $this->runFile('tests/011-simple-error.test');
     }
 
+    public function testSimple()
+    {
+        $this->runFile('tests/012-simple-move.test');
+    }
+
+    public function testColorRotationError()
+    {
+        $this->runFile('tests/013-color-rotation-error.test');
+    }
+
+    public function testPawnMovesOneSquareVertically()
+    {
+        $this->runFile('tests/021-pawn-moves-one-square-vertically.test');
+    }
+
+    public function testPawnCanMoveTwoSquaresOnFirstMove()
+    {
+        $this->runFile('tests/022-pawn-can-move-two-squares-on-first-move.test');
+    }
+
+    public function testPawnCanNotMoveDiagonally()
+    {
+        $this->runFile('tests/023-pawn-can-not-move-diagonally.test');
+    }
+
+    public function testPawnCapturesDiagonally()
+    {
+        $this->runFile('tests/024-pawn-captures-diagonally.test');
+    }
+
+    public function testPawnCanNotCaptureVertically()
+    {
+        $this->runFile('tests/025-pawn-can-not-capture-vertically.test');
+    }
+
+    public function testPawnCanNotMoveFartherOneSquare()
+    {
+        $this->runFile('tests/026-pawn-can-not-move-farther-one-square.test');
+    }
+
+    public function testPawnCanNotMoveAcrossFigure()
+    {
+        $this->runFile('tests/027-pawn-can-not-move-across-figure.test');
+    }
+
+    
+    
     private function runFile($file)
     {
         $lines = file($file);
