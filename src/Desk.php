@@ -49,10 +49,6 @@ class Desk
             throw new \Exception("Incorrect move");
         }
 
-        if ($move == 'e2-e8') {
-            throw new \Exception("Invalid move e2-e8");
-        }
-
         $xFrom = $match[1];
         $yFrom = $match[2];
         $xTo = $match[3];
