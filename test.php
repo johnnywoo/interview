@@ -57,8 +57,16 @@ class Test extends \PHPUnit_Framework_TestCase
         $this->runFile('tests/027-pawn-can-not-move-across-figure.test');
     }
 
-    
-    
+
+    /**
+     * Test file structure
+     *
+     * line 1: moves as arguments to chess.php
+     * line 2: 'correct' if all moves are correct, 'error' if there are incorrect moves
+     * Other lines: output of chess.php (final chess board) if all moves are correct
+     *
+     * @param string $file
+     */
     private function runFile($file)
     {
         $lines = file($file);
