@@ -79,10 +79,10 @@ class Test extends \PHPUnit_Framework_TestCase
         $out = array();
         exec('php chess.php ' . $moves, $out, $err);
         if ($isCorrect) {
-            $this->assertEquals(0, $err);
+            $this->assertEquals(0, $err, "Moves are correct, but chess.php thinks there is an error:\n" . $moves);
             $this->assertEquals(join("", $lines), join("\n", $out) . "\n");
         } else {
-            $this->assertNotEquals(0, $err);
+            $this->assertNotEquals(0, $err, "Moves are invalid, but chess.php does not detect that:\n" . $moves);
         }
     }
 }
