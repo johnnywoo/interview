@@ -22,6 +22,11 @@ class Test extends \PHPUnit_Framework_TestCase
         $this->runFile('tests/013-color-rotation-error.test');
     }
 
+    public function testColorRotationCorrect()
+    {
+        $this->runFile('tests/014-color-rotation-correct.test');
+    }
+
     public function testPawnMovesOneSquareVertically()
     {
         $this->runFile('tests/021-pawn-moves-one-square-vertically.test');
@@ -70,19 +75,27 @@ class Test extends \PHPUnit_Framework_TestCase
     private function runFile($file)
     {
         $lines = file($file);
-        $moves = $lines[0];
+        $moves = trim($lines[0]);
+        $movesDesc = $moves ?: '(no moves)';
         unset($lines[0]);
 
         $isCorrect = trim($lines[1]) != 'error';
         unset($lines[1]);
 
+        $redColor = '';
+        $noColor  = '';
+        if (posix_isatty(STDOUT)) {
+            $redColor = "\033[31m";
+            $noColor  = "\033[m";
+        }
+
         $out = array();
         exec('php chess.php ' . $moves, $out, $err);
         if ($isCorrect) {
-            $this->assertEquals(0, $err, "Moves are correct, but chess.php thinks there is an error:\n" . $moves);
+            $this->assertEquals(0, $err, $redColor . "Moves are correct, but chess.php thinks there is an error:\n" . $movesDesc . $noColor . "\n");
             $this->assertEquals(join("", $lines), join("\n", $out) . "\n");
         } else {
-            $this->assertNotEquals(0, $err, "Moves are invalid, but chess.php does not detect that:\n" . $moves);
+            $this->assertNotEquals(0, $err, $redColor . "Moves are invalid, but chess.php does not detect that:\n" . $movesDesc . $noColor . "\n");
         }
     }
 }
