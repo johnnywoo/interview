@@ -3,6 +3,7 @@
 class Desk
 {
     private $figures = array();
+    private $lastIsBlack = true;
 
     public function __construct()
     {
@@ -55,9 +56,63 @@ class Desk
         $yTo = $match[4];
 
         if (isset($this->figures[$xFrom][$yFrom])) {
+        	
+        	$figure = $this->figures[$xFrom][$yFrom];
+        	
+        	$this->checkOrder($figure);
+        	$this->checkAcrossFigure($xFrom, $yFrom, $xTo, $yTo);
+        	
+        	if (!isset($this->figures[$xTo][$yTo])) {
+        		$figure->checkMove($xFrom, $yFrom, $xTo, $yTo);
+        	} else {
+        		$figure->checkAttack($xFrom, $yFrom, $xTo, $yTo);
+        	}
+        	
             $this->figures[$xTo][$yTo] = $this->figures[$xFrom][$yFrom];
         }
+        
         unset($this->figures[$xFrom][$yFrom]);
+    }
+    
+    private function checkOrder($figure) {
+    	
+    	if ($this->lastIsBlack != $figure->isBlack()) {
+    		$this->lastIsBlack = !$this->lastIsBlack;
+    	} else {
+    		throw new \Exception("Wrong move order");
+    	}
+    }
+    
+    private function checkAcrossFigure($xFrom, $yFrom, $xTo, $yTo) {
+    	
+    	if ($xFrom == $xTo) {
+    		
+    		$this->checkVerticalAcross($xFrom, $yFrom, $xTo, $yTo);
+    		
+    	} else if ($yFrom == $yTo) {
+    		
+    		$this->checkHorizontalAcross($xFrom, $yFrom, $xTo, $yTo);
+    		
+    	} else if (abs($xFrom - $xTo) == abs($yFrom - $yTo)) {
+    		$this->checkDiagonalAcross($xFrom, $yFrom, $xTo, $yTo);
+    	}
+    }
+    
+    private function checkVerticalAcross($xFrom, $yFrom, $xTo, $yTo) {
+    	
+    	for ($i = $yFrom + 1; $i < $yTo; $i++) {
+    		if (isset($this->figures[$xFrom][$i])) {
+    			throw new \Exception("Could not across figure at: " . $xFrom . $i);
+    		}
+    	}
+    }
+    
+    private function checkHorizontalAcross($xFrom, $yFrom, $xTo, $yTo) {
+    	/** not implemented for the Pawn task */
+    }
+    
+    private function checkDiagonalAcross($xFrom, $yFrom, $xTo, $yTo) {
+    	/** not implemented for the Pawn task */
     }
 
     public function dump()
