@@ -2,61 +2,103 @@
 
 class Test extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @group rotation
+     * @group pawn
+     */
     public function testNoMoves()
     {
         $this->runFile('tests/001-no-moves.test');
     }
 
+    /**
+     * @group pawn
+     */
     public function testSimpleError()
     {
         $this->runFile('tests/011-simple-error.test');
     }
 
+    /**
+     * @group rotation
+     * @group pawn
+     */
     public function testSimple()
     {
         $this->runFile('tests/012-simple-move.test');
     }
 
+    /**
+     * @group rotation
+     */
     public function testColorRotationError()
     {
         $this->runFile('tests/013-color-rotation-error.test');
     }
 
+    /**
+     * @group rotation
+     * @group pawn
+     */
     public function testColorRotationCorrect()
     {
         $this->runFile('tests/014-color-rotation-correct.test');
     }
 
+    /**
+     * @group rotation
+     * @group pawn
+     */
     public function testPawnMovesOneSquareVertically()
     {
         $this->runFile('tests/021-pawn-moves-one-square-vertically.test');
     }
 
+    /**
+     * @group rotation
+     * @group pawn
+     */
     public function testPawnCanMoveTwoSquaresOnFirstMove()
     {
         $this->runFile('tests/022-pawn-can-move-two-squares-on-first-move.test');
     }
 
+    /**
+     * @group pawn
+     */
     public function testPawnCanNotMoveDiagonally()
     {
         $this->runFile('tests/023-pawn-can-not-move-diagonally.test');
     }
 
+    /**
+     * @group rotation
+     * @group pawn
+     */
     public function testPawnCapturesDiagonally()
     {
         $this->runFile('tests/024-pawn-captures-diagonally.test');
     }
 
+    /**
+     * @group pawn
+     */
     public function testPawnCanNotCaptureVertically()
     {
         $this->runFile('tests/025-pawn-can-not-capture-vertically.test');
     }
 
+    /**
+     * @group pawn
+     */
     public function testPawnCanNotMoveFartherOneSquare()
     {
         $this->runFile('tests/026-pawn-can-not-move-farther-one-square.test');
     }
 
+    /**
+     * @group pawn
+     */
     public function testPawnCanNotMoveAcrossFigure()
     {
         $this->runFile('tests/027-pawn-can-not-move-across-figure.test');
@@ -84,7 +126,7 @@ class Test extends \PHPUnit_Framework_TestCase
 
         $redColor = '';
         $noColor  = '';
-        if (posix_isatty(STDOUT)) {
+        if (function_exists('posix_isatty') && posix_isatty(STDOUT)) {
             $redColor = "\033[31m";
             $noColor  = "\033[m";
         }
