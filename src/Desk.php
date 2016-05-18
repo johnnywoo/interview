@@ -4,6 +4,8 @@ class Desk
 {
     private $figures = array();
 
+    private $isBlackMove = false;
+
     public function __construct()
     {
         $this->figures['a'][1] = new Rook(false);
@@ -54,9 +56,24 @@ class Desk
         $xTo = $match[3];
         $yTo = $match[4];
 
-        if (isset($this->figures[$xFrom][$yFrom])) {
-            $this->figures[$xTo][$yTo] = $this->figures[$xFrom][$yFrom];
+        if (isset($this->figures[$xFrom][$yFrom]) && $this->figures[$xFrom][$yFrom] instanceof \Figure) {
+            /**
+             * @var Figure $figureFrom
+             */
+            $figureFrom = $this->figures[$xFrom][$yFrom];
+            if ($this->isBlackMove && !$figureFrom->isBlack()) {
+                throw new \Exception('Now is black turn');
+            }
+
+            if (
+                $figureFrom->performMove($xFrom, $yFrom, $xTo, $yTo)
+                && $this->validateMove($xFrom, $yFrom, $xTo, $yTo)
+            ) {
+                $this->figures[$xTo][$yTo] = $figureFrom;
+                $this->isBlackMove = !$this->isBlackMove;
+            }
         }
+
         unset($this->figures[$xFrom][$yFrom]);
     }
 
@@ -74,5 +91,53 @@ class Desk
             echo "\n";
         }
         echo "  abcdefgh\n";
+    }
+
+    /**
+     * @param $xFrom
+     * @param $yFrom
+     * @param $xTo
+     * @param $yTo
+     * @return bool
+     * @throws Exception
+     */
+    private function validateMove($xFrom, $yFrom, $xTo, $yTo)
+    {
+        $yFrom = (int)$yFrom;
+        $yTo = (int)$yTo;
+
+        //@todo Пешка не может перепрыгивать через другие фигуры;
+        //@todo Пешка может бить фигуры противника только по диагонали вперёд на одну клетку;
+
+        /**
+         * @var Figure $figureFrom
+         */
+        $figureFrom = $this->figures[$xFrom][$yFrom];
+
+        if ($figureFrom instanceof \Pawn) {
+            if ($xTo !== $xFrom) {
+                /**
+                 * @var Figure $figureTo
+                 */
+                $figureTo = (isset($this->figures[$xTo][$yTo])) ? $this->figures[$xTo][$yTo] : null;
+
+                if (!$figureTo) {
+                    throw new \Exception('Никого не едим');
+                }
+
+                if ($figureTo->isBlack() === $figureFrom->isBlack()) {
+                    throw new \Exception('Едим свою фигуру');
+                }
+            } else {
+                if (abs($yTo - $yFrom) === 2) {
+                    $yToCheck = ($yTo > $yFrom) ? $yTo - 1 : $yTo + 1;
+                    if (isset($this->figures[$xFrom][$yToCheck])) {
+                        throw new \Exception('Перепрыгиваем через фигуру');
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 }
