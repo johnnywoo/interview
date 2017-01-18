@@ -1,21 +1,18 @@
 <?php
 
-class Test extends \PHPUnit_Framework_TestCase
-{
+class Test extends \PHPUnit_Framework_TestCase {
     /**
      * @group rotation
      * @group pawn
      */
-    public function testNoMoves()
-    {
+    public function testNoMoves() {
         $this->runFile('tests/001-no-moves.test');
     }
 
     /**
      * @group pawn
      */
-    public function testSimpleError()
-    {
+    public function testSimpleError() {
         $this->runFile('tests/011-simple-error.test');
     }
 
@@ -23,16 +20,14 @@ class Test extends \PHPUnit_Framework_TestCase
      * @group rotation
      * @group pawn
      */
-    public function testSimple()
-    {
+    public function testSimple() {
         $this->runFile('tests/012-simple-move.test');
     }
 
     /**
      * @group rotation
      */
-    public function testColorRotationError()
-    {
+    public function testColorRotationError() {
         $this->runFile('tests/013-color-rotation-error.test');
     }
 
@@ -40,8 +35,7 @@ class Test extends \PHPUnit_Framework_TestCase
      * @group rotation
      * @group pawn
      */
-    public function testColorRotationCorrect()
-    {
+    public function testColorRotationCorrect() {
         $this->runFile('tests/014-color-rotation-correct.test');
     }
 
@@ -49,8 +43,7 @@ class Test extends \PHPUnit_Framework_TestCase
      * @group rotation
      * @group pawn
      */
-    public function testPawnMovesOneSquareVertically()
-    {
+    public function testPawnMovesOneSquareVertically() {
         $this->runFile('tests/021-pawn-moves-one-square-vertically.test');
     }
 
@@ -58,16 +51,14 @@ class Test extends \PHPUnit_Framework_TestCase
      * @group rotation
      * @group pawn
      */
-    public function testPawnCanMoveTwoSquaresOnFirstMove()
-    {
+    public function testPawnCanMoveTwoSquaresOnFirstMove() {
         $this->runFile('tests/022-pawn-can-move-two-squares-on-first-move.test');
     }
 
     /**
      * @group pawn
      */
-    public function testPawnCanNotMoveDiagonally()
-    {
+    public function testPawnCanNotMoveDiagonally() {
         $this->runFile('tests/023-pawn-can-not-move-diagonally.test');
     }
 
@@ -75,32 +66,28 @@ class Test extends \PHPUnit_Framework_TestCase
      * @group rotation
      * @group pawn
      */
-    public function testPawnCapturesDiagonally()
-    {
+    public function testPawnCapturesDiagonally() {
         $this->runFile('tests/024-pawn-captures-diagonally.test');
     }
 
     /**
      * @group pawn
      */
-    public function testPawnCanNotCaptureVertically()
-    {
+    public function testPawnCanNotCaptureVertically() {
         $this->runFile('tests/025-pawn-can-not-capture-vertically.test');
     }
 
     /**
      * @group pawn
      */
-    public function testPawnCanNotMoveFartherOneSquare()
-    {
+    public function testPawnCanNotMoveFartherOneSquare() {
         $this->runFile('tests/026-pawn-can-not-move-farther-one-square.test');
     }
 
     /**
      * @group pawn
      */
-    public function testPawnCanNotMoveAcrossFigure()
-    {
+    public function testPawnCanNotMoveAcrossFigure() {
         $this->runFile('tests/027-pawn-can-not-move-across-figure.test');
     }
 
@@ -114,10 +101,9 @@ class Test extends \PHPUnit_Framework_TestCase
      *
      * @param string $file
      */
-    private function runFile($file)
-    {
-        $lines = file($file);
-        $moves = trim($lines[0]);
+    private function runFile($file) {
+        $lines     = file($file);
+        $moves     = trim($lines[0]);
         $movesDesc = $moves ?: '(no moves)';
         unset($lines[0]);
 
@@ -131,7 +117,7 @@ class Test extends \PHPUnit_Framework_TestCase
             $noColor  = "\033[m";
         }
 
-        $out = array();
+        $out = [];
         exec('php chess.php ' . $moves, $out, $err);
         if ($isCorrect) {
             $this->assertEquals(0, $err, $redColor . "Moves are correct, but chess.php thinks there is an error:\n" . $movesDesc . $noColor . "\n");

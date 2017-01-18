@@ -1,11 +1,9 @@
 <?php
 
-class Desk
-{
-    private $figures = array();
+class Desk {
+    private $figures = [];
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->figures['a'][1] = new Rook(false);
         $this->figures['b'][1] = new Knight(false);
         $this->figures['c'][1] = new Bishop(false);
@@ -43,16 +41,15 @@ class Desk
         $this->figures['h'][8] = new Rook(true);
     }
 
-    public function move($move)
-    {
+    public function move($move) {
         if (!preg_match('/^([a-h])(\d)-([a-h])(\d)$/', $move, $match)) {
             throw new \Exception("Incorrect move");
         }
 
         $xFrom = $match[1];
         $yFrom = $match[2];
-        $xTo = $match[3];
-        $yTo = $match[4];
+        $xTo   = $match[3];
+        $yTo   = $match[4];
 
         if (isset($this->figures[$xFrom][$yFrom])) {
             $this->figures[$xTo][$yTo] = $this->figures[$xFrom][$yFrom];
@@ -60,8 +57,7 @@ class Desk
         unset($this->figures[$xFrom][$yFrom]);
     }
 
-    public function dump()
-    {
+    public function dump() {
         for ($y = 8; $y >= 1; $y--) {
             echo "$y ";
             for ($x = 'a'; $x <= 'h'; $x++) {
