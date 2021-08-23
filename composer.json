@@ -1,0 +1,12 @@
+{
+    "name": "johnnywoo/interview",
+    "type": "project",
+    "autoload": {
+        "psr-0": {
+            "": "src"
+        }
+    },
+    "require": {
+        "phpunit/phpunit": "8.5.19"
+    }
+}

@@ -1,6 +1,6 @@
 <?php
 
-class Desk {
+class Board {
     private $figures = [];
 
     public function __construct() {
