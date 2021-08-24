@@ -1,20 +1,18 @@
 <?php
 
-try {
-    foreach (glob('src/*.php') as $file) {
-        require_once $file;
-    }
+require_once __DIR__ . '/vendor/autoload.php';
 
-    $desk = new Desk();
+try {
+    $board = new Board();
 
     $args = $argv;
     array_shift($args);
 
     foreach ($args as $move) {
-        $desk->move($move);
+        $board->move($move);
     }
 
-    $desk->dump();
+    $board->dump();
 } catch (\Exception $e) {
     echo $e->getMessage() . "\n";
     exit(1);
