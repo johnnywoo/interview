@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/vendor/autoload.php';
+
 class Test extends \PHPUnit\Framework\TestCase {
     /**
      * @group rotation
