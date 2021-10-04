@@ -32,7 +32,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '890d9e3bdb92185bddc15e4dc724b3743479ad85',
+    'reference' => '767f49aca068226e76c2c7ea376208e2dd092f40',
     'name' => 'johnnywoo/interview',
   ),
   'versions' => 
@@ -53,7 +53,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '890d9e3bdb92185bddc15e4dc724b3743479ad85',
+      'reference' => '767f49aca068226e76c2c7ea376208e2dd092f40',
     ),
     'myclabs/deep-copy' => 
     array (
@@ -160,12 +160,12 @@ private static $installed = array (
     ),
     'phpunit/php-token-stream' => 
     array (
-      'pretty_version' => '4.0.4',
-      'version' => '4.0.4.0',
+      'pretty_version' => '3.1.3',
+      'version' => '3.1.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'a853a0e183b9db7eed023d7933a858fa1c8d25a3',
+      'reference' => '9c1da83261628cb24b6a6df371b6e312b3954768',
     ),
     'phpunit/phpunit' => 
     array (
