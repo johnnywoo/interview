@@ -7,16 +7,7 @@ with figure positions after those moves.
 
 Example:
 
-    $ php chess.php e2-e4 e7-e5
-    8 ♜♞♝♛♚♝♞♜
-    7 ♟♟♟♟-♟♟♟
-    6 --------
-    5 ----♟---
-    4 ----♙---
-    3 --------
-    2 ♙♙♙♙-♙♙♙
-    1 ♖♘♗♕♔♗♘♖
-      abcdefgh
+<img src="example.png" width="405" height="349" alt="Example of the program execution"/>
 
 Currently `chess.php` does nothing to verify chess rules in those moves.
 
