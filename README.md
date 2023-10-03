@@ -9,7 +9,6 @@ Example:
 
 `php chess.php e2-e4 e7-e5`
 
-The output:
 <img src="example.png" width="405" height="349" alt="Example of the program execution"/>
 
 Validation:
