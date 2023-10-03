@@ -7,9 +7,17 @@ with figure positions after those moves.
 
 Example:
 
+`php chess.php e2-e4 e7-e5`
+
+The output:
 <img src="example.png" width="405" height="349" alt="Example of the program execution"/>
 
+Validation:
+
 Currently `chess.php` does nothing to verify chess rules in those moves.
+And you don't need to implement each rule for the game.
+
+Add only the validations required by the tasks below.
 
 ## Task 1
 
